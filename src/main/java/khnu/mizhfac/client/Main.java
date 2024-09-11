@@ -1,4 +1,8 @@
-package khnu.mizhfac;
+package khnu.mizhfac.client;
+
+import khnu.mizhfac.Battle;
+import khnu.mizhfac.Knight;
+import khnu.mizhfac.Warrior;
 
 public class Main {
     public static void main(String[] args) {
