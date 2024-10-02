@@ -37,8 +37,8 @@ class FightTest {
         int warriorAttack = warrior1.getAttack();
         int knightAttack = warrior2.getAttack();
 
-        assertEquals(Warrior.attack, warriorAttack);
-        assertEquals(Knight.attack, knightAttack);
+        assertEquals(Warrior.ATTACK, warriorAttack);
+        assertEquals(Knight.ATTACK, knightAttack);
     }
 
     /*
@@ -125,4 +125,49 @@ class FightTest {
         assertFalse(answer);
     }
 
+    @Test
+    @DisplayName("8. Fight")
+    void fight8() {
+        var unit1 = new Defender();
+        var unit2 = new Rookie();
+
+        Battle.fight(unit1, unit2);
+        var answer = unit1.getHealth();
+
+        assertEquals(Defender.INITIAL_HEALTH, answer);
+    }
+
+    @Test
+    @DisplayName("9. Fight")
+    void fight9() {
+        var unit1 = new Defender();
+        var unit2 = new Rookie();
+        var unit3 = new Warrior();
+
+        Battle.fight(unit1, unit2);
+        var answer = Battle.fight(unit1, unit3);
+
+        assertTrue(answer);
+    }
+
+    static class Rookie extends Warrior {
+        public int getAttack() {
+            return 1;
+        }
+    }
+
+    @Test
+    @DisplayName("Warrior looses to Defender")
+    void testWarriorVsDefender() {
+        var warrior = new Warrior();
+        var defender = new Defender();
+
+        var res = Battle.fight(warrior, defender);
+
+        assertAll(
+                () -> assertFalse(res),
+                () -> assertEquals(-1, warrior.getHealth()),
+                () -> assertEquals(9, defender.getHealth())
+        );
+    }
 }

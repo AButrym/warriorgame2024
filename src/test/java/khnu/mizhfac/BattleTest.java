@@ -105,4 +105,32 @@ public class BattleTest {
 
         assertTrue(result);
     }
+    @Test
+    @DisplayName("Test for cloning")
+    void battleClone() {
+        var warrior1 = new Warrior();
+        var warrior2 = new Warrior();
+        Battle.fight(warrior1, warrior2);
+        assertTrue(warrior1.isAlive());
+
+        var army1 = new Army()
+                .addUnits(Warrior::new, 1);
+        var army2 = new Army()
+                .addUnits(warrior1::clone, 100);
+
+        boolean result = Battle.fight(army1, army2);
+
+        assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Simple test for cloning")
+    void battleClone1() {
+        var warrior1 = new Warrior();
+        var warrior2 = new Warrior();
+        Battle.fight(warrior1, warrior2);
+        assertTrue(warrior1.isAlive());
+        var warrior3 = warrior1.clone();
+        assertEquals(warrior1.getHealth(), warrior3.getHealth());
+    }
 }

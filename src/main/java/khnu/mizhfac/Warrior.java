@@ -1,15 +1,33 @@
 package khnu.mizhfac;
 
-public class Warrior {
-    static final int attack = 5;
-    private int health = 50;
+public class Warrior implements Cloneable {
+    static final int ATTACK = 5;
+    static final int INITIAL_HEALTH = 50;
+    private int health;
+
+    protected Warrior(int health) {
+        this.health = health;
+    }
+
+    public Warrior() {
+        this(INITIAL_HEALTH);
+    }
+
+    @Override
+    public Warrior clone() {
+        try {
+            return (Warrior) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null; // you'll never get here
+        }
+    }
 
     public boolean isAlive() {
         return health > 0;
     }
 
     public int getAttack() {
-        return attack;
+        return ATTACK;
     }
 
     int getHealth() {
@@ -21,8 +39,10 @@ public class Warrior {
     }
 
     public void hit(Warrior opponent) {
-        var currentHealth = opponent.getHealth();
-        var reducedHealth = currentHealth - getAttack();
-        opponent.setHealth(reducedHealth);
+        opponent.acceptDamage(getAttack());
+    }
+
+    protected void acceptDamage(int damage) {
+        setHealth(getHealth() - damage);
     }
 }
