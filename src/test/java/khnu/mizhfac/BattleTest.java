@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BattleTest {
     @Test
-    @DisplayName("Smoke test for stage 2")
+    @DisplayName("Smoke test for stage 2 Army Battles")
     void stage2() {
         // arrange  given
         var myArmy = new Army();
@@ -105,6 +105,7 @@ public class BattleTest {
 
         assertTrue(result);
     }
+
     @Test
     @DisplayName("Test for cloning")
     void battleClone() {

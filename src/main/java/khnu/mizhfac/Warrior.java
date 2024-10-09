@@ -4,9 +4,11 @@ public class Warrior implements Cloneable {
     static final int ATTACK = 5;
     static final int INITIAL_HEALTH = 50;
     private int health;
+    private final int initialHealth;
 
     protected Warrior(int health) {
         this.health = health;
+        initialHealth = health;
     }
 
     public Warrior() {
@@ -35,7 +37,11 @@ public class Warrior implements Cloneable {
     }
 
     private void setHealth(int health) {
-        this.health = health;
+        this.health = Math.min(health, initialHealth);
+    }
+
+    protected void heal(int healPoints) {
+        setHealth(getHealth() + healPoints);
     }
 
     public void hit(Warrior opponent) {

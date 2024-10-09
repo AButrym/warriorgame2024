@@ -4,11 +4,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 class FightTest {
 
     @Test
-    @DisplayName("Smoke test for stage 1")
+    @DisplayName("Smoke test for stage 1 Warrior")
     void stage1() {
         // arrange  given
         var chuck = new Warrior();
@@ -168,6 +169,37 @@ class FightTest {
                 () -> assertFalse(res),
                 () -> assertEquals(-1, warrior.getHealth()),
                 () -> assertEquals(9, defender.getHealth())
+        );
+    }
+
+    @Test
+    @DisplayName("Defender wins Vampire")
+    void testDefenderVsVampire() {
+        var defender = new Defender();
+        var vampire = new Vampire();
+
+        var res = Battle.fight(defender, vampire);
+
+        assertAll(
+                () -> assertTrue(res),
+                () -> assertEquals(-1, vampire.getHealth()),
+                () -> assertEquals(22, defender.getHealth())
+        );
+    }
+
+    @Test
+    @DisplayName("Vampire vs Rookie remains healthy")
+    void testVampireVsRookieRemainHealthy() {
+        var vampire = new Vampire();
+        var rookie = new Rookie();
+
+        var res = Battle.fight(rookie, vampire);
+
+        assertAll(
+                () -> assertFalse(res),
+                () -> assertThat(vampire.getHealth())
+                        .as(() -> "Vampire should not heal himself above original health")
+                        .isEqualTo(Vampire.INITIAL_HEALTH)
         );
     }
 }
