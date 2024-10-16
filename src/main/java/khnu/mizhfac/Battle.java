@@ -1,6 +1,6 @@
 package khnu.mizhfac;
 
-import java.util.Iterator;
+import khnu.mizhfac.interfaces.Warrior;
 
 public class Battle {
     public static boolean fight(

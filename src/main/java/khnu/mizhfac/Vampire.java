@@ -1,5 +1,7 @@
 package khnu.mizhfac;
 
+import khnu.mizhfac.interfaces.Warrior;
+
 public class Vampire extends Warrior {
     static final int INITIAL_HEALTH = 40;
     static final int ATTACK = 4;

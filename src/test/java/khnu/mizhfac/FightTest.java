@@ -1,8 +1,11 @@
 package khnu.mizhfac;
 
+import khnu.mizhfac.interfaces.Warrior;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static khnu.mizhfac.WarriorFactory.createWarrior;
+import static khnu.mizhfac.WarriorType.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
@@ -12,10 +15,10 @@ class FightTest {
     @DisplayName("Smoke test for stage 1 Warrior")
     void stage1() {
         // arrange  given
-        var chuck = new Warrior();
-        var bruce = new Warrior();
+        var chuck = createWarrior(WARRIOR);
+        var bruce = createWarrior(WARRIOR);
         var carl = new Knight();
-        var dave = new Warrior();
+        var dave = createWarrior(WARRIOR);
         // act      when
         var resFight1 = Battle.fight(chuck, bruce);
         var resFight2 = Battle.fight(dave, carl);
@@ -32,13 +35,13 @@ class FightTest {
 
     @Test
     void testPolymorphicGetAttack() {
-        Warrior warrior1 = new Warrior();
+        Warrior warrior1 = createWarrior(WARRIOR);
         Warrior warrior2 = new Knight();
 
         int warriorAttack = warrior1.getAttack();
         int knightAttack = warrior2.getAttack();
 
-        assertEquals(Warrior.ATTACK, warriorAttack);
+        assertEquals(warrior1.ATTACK, warriorAttack);
         assertEquals(Knight.ATTACK, knightAttack);
     }
 
@@ -52,7 +55,7 @@ class FightTest {
     @Test
     @DisplayName("1. Fight")
     void fight1() {
-        var carl = new Warrior();
+        var carl = createWarrior(WARRIOR);
         var jim = new Knight();
 
         var answer = Battle.fight(carl, jim);
@@ -63,7 +66,7 @@ class FightTest {
     @DisplayName("2. Fight")
     void fight2() {
         var ramon = new Knight();
-        var slevin = new Warrior();
+        var slevin = createWarrior(WARRIOR);
 
         var answer = Battle.fight(ramon, slevin);
 
@@ -72,8 +75,8 @@ class FightTest {
     @Test
     @DisplayName("3. Fight")
     void fight3() {
-        var bob = new Warrior();
-        var mars = new Warrior();
+        var bob = createWarrior(WARRIOR);
+        var mars = createWarrior(WARRIOR);
 
         Battle.fight(bob, mars);
 
@@ -84,7 +87,7 @@ class FightTest {
     @DisplayName("4. Fight")
     void fight4() {
         var zeus = new Knight();
-        var godkiller = new Warrior();
+        var godkiller = createWarrior(WARRIOR);
 
         Battle.fight(zeus, godkiller);
 
@@ -94,8 +97,8 @@ class FightTest {
     @Test
     @DisplayName("5. Fight")
     void fight5() {
-        var husband = new Warrior();
-        var wife = new Warrior();
+        var husband = createWarrior(WARRIOR);
+        var wife = createWarrior(WARRIOR);
 
         Battle.fight(husband, wife);
 
@@ -105,7 +108,7 @@ class FightTest {
     @Test
     @DisplayName("6. Fight")
     void fight6() {
-        var dragon = new Warrior();
+        var dragon = createWarrior(WARRIOR);
         var knight = new Knight();
 
         Battle.fight(dragon, knight);
@@ -116,9 +119,9 @@ class FightTest {
     @Test
     @DisplayName("7. Fight")
     void fight7() {
-        var unit1 = new Warrior();
+        var unit1 = createWarrior(WARRIOR);
         var unit2 = new Knight();
-        var unit3 = new Warrior();
+        var unit3 = createWarrior(WARRIOR);
 
         Battle.fight(unit1, unit2);
         var answer = Battle.fight(unit2, unit3);
@@ -143,7 +146,7 @@ class FightTest {
     void fight9() {
         var unit1 = new Defender();
         var unit2 = new Rookie();
-        var unit3 = new Warrior();
+        var unit3 = createWarrior(WARRIOR);
 
         Battle.fight(unit1, unit2);
         var answer = Battle.fight(unit1, unit3);
@@ -160,7 +163,7 @@ class FightTest {
     @Test
     @DisplayName("Warrior looses to Defender")
     void testWarriorVsDefender() {
-        var warrior = new Warrior();
+        var warrior = createWarrior(WARRIOR);
         var defender = new Defender();
 
         var res = Battle.fight(warrior, defender);

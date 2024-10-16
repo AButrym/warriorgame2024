@@ -1,5 +1,6 @@
 package khnu.mizhfac;
 
+import khnu.mizhfac.interfaces.Warrior;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

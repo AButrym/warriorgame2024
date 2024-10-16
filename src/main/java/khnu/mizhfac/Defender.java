@@ -1,30 +1,23 @@
 package khnu.mizhfac;
 
-public class Defender extends Warrior {
-    static final int INITIAL_HEALTH = 60;
-    static final int ATTACK = 3;
-    static final int DEFENCE = 2;
+import static khnu.mizhfac.WarriorType.DEFENDER;
 
-    /*  health = 60
-        attack = 3
-        defense = 2
-        */
-
+public class Defender extends WarriorBase {
     public Defender() {
-        super(INITIAL_HEALTH);
+        super(DEFENDER.INITIAL_HEALTH);
     }
 
     @Override
     public int getAttack() {
-        return ATTACK;
+        return DEFENDER.ATTACK;
     }
 
     public int getDefence() {
-        return DEFENCE;
+        return DEFENDER.extraProps.get("DEFENCE");
     }
 
     @Override
-    protected void acceptDamage(int damage) {
+    public void acceptDamage(int damage) {
         int reducedDamage = Math.max(0, damage - getDefence());
         super.acceptDamage(reducedDamage);
     }

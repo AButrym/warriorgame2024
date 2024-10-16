@@ -1,34 +1,12 @@
 package khnu.mizhfac;
 
+import khnu.mizhfac.interfaces.Warrior;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Supplier;
-
-enum WarriorType {
-    WARRIOR, KNIGHT;
-}
-
-class WarriorFactory {
-    static Warrior createWarrior(WarriorType type) {
-        return switch (type) {
-            case WARRIOR -> new Warrior();
-            case KNIGHT -> new Knight();
-        };
-    }
-    static Warrior createWarrior(String type) {
-        return switch (type.toUpperCase()) {
-            case "WARRIOR" -> new Warrior();
-            case "KNIGHT" -> new Knight();
-            default -> throw new IllegalArgumentException(
-                    "Unknown type: " + type);
-        };
-    }
-    static Warrior createWarrior(Class<? extends Warrior> type) {
-        return createWarrior(type.getSimpleName().toUpperCase());
-    }
-}
 
 public class Army {
     private List<Warrior> warriors = new ArrayList<>();

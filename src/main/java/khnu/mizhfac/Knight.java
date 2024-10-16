@@ -1,15 +1,14 @@
 package khnu.mizhfac;
 
-public class Knight extends Warrior {
-    static final int INITIAL_HEALTH = 50;
-    static final int ATTACK = 7;
+import static khnu.mizhfac.WarriorType.KNIGHT;
 
+public class Knight extends WarriorBase {
     public Knight() {
-        super(INITIAL_HEALTH);
+        super(KNIGHT.INITIAL_HEALTH);
     }
 
     @Override
     public int getAttack() {
-        return ATTACK;
+        return KNIGHT.ATTACK;
     }
 }
