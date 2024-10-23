@@ -21,14 +21,6 @@ public class Army {
         return this;
     }
 
-    public Army addUnits(
-            Class<? extends Warrior> type,
-            int howMany
-    ) {
-        addUnits(() -> WarriorFactory.createWarrior(type), howMany);
-        return this;
-    }
-
     private void addOneUnit(Warrior warrior) {
         warriors.add(warrior);
     }

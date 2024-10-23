@@ -17,7 +17,7 @@ class FightTest {
         // arrange  given
         var chuck = createWarrior(WARRIOR);
         var bruce = createWarrior(WARRIOR);
-        var carl = new Knight();
+        var carl = createWarrior(KNIGHT);
         var dave = createWarrior(WARRIOR);
         // act      when
         var resFight1 = Battle.fight(chuck, bruce);
@@ -36,13 +36,13 @@ class FightTest {
     @Test
     void testPolymorphicGetAttack() {
         Warrior warrior1 = createWarrior(WARRIOR);
-        Warrior warrior2 = new Knight();
+        Warrior warrior2 = createWarrior(KNIGHT);
 
         int warriorAttack = warrior1.getAttack();
         int knightAttack = warrior2.getAttack();
 
-        assertEquals(warrior1.ATTACK, warriorAttack);
-        assertEquals(Knight.ATTACK, knightAttack);
+        assertEquals(WARRIOR.ATTACK, warriorAttack);
+        assertEquals(KNIGHT.ATTACK, knightAttack);
     }
 
     /*
@@ -56,7 +56,7 @@ class FightTest {
     @DisplayName("1. Fight")
     void fight1() {
         var carl = createWarrior(WARRIOR);
-        var jim = new Knight();
+        var jim = createWarrior(KNIGHT);
 
         var answer = Battle.fight(carl, jim);
 
@@ -65,7 +65,7 @@ class FightTest {
     @Test
     @DisplayName("2. Fight")
     void fight2() {
-        var ramon = new Knight();
+        var ramon = createWarrior(KNIGHT);
         var slevin = createWarrior(WARRIOR);
 
         var answer = Battle.fight(ramon, slevin);
@@ -86,7 +86,7 @@ class FightTest {
     @Test
     @DisplayName("4. Fight")
     void fight4() {
-        var zeus = new Knight();
+        var zeus = createWarrior(KNIGHT);
         var godkiller = createWarrior(WARRIOR);
 
         Battle.fight(zeus, godkiller);
@@ -109,7 +109,7 @@ class FightTest {
     @DisplayName("6. Fight")
     void fight6() {
         var dragon = createWarrior(WARRIOR);
-        var knight = new Knight();
+        var knight = createWarrior(KNIGHT);
 
         Battle.fight(dragon, knight);
 
@@ -120,7 +120,7 @@ class FightTest {
     @DisplayName("7. Fight")
     void fight7() {
         var unit1 = createWarrior(WARRIOR);
-        var unit2 = new Knight();
+        var unit2 = createWarrior(KNIGHT);
         var unit3 = createWarrior(WARRIOR);
 
         Battle.fight(unit1, unit2);
@@ -132,19 +132,19 @@ class FightTest {
     @Test
     @DisplayName("8. Fight")
     void fight8() {
-        var unit1 = new Defender();
+        var unit1 = DEFENDER.create();
         var unit2 = new Rookie();
 
         Battle.fight(unit1, unit2);
         var answer = unit1.getHealth();
 
-        assertEquals(Defender.INITIAL_HEALTH, answer);
+        assertEquals(DEFENDER.INITIAL_HEALTH, answer);
     }
 
     @Test
     @DisplayName("9. Fight")
     void fight9() {
-        var unit1 = new Defender();
+        var unit1 = DEFENDER.create();
         var unit2 = new Rookie();
         var unit3 = createWarrior(WARRIOR);
 
@@ -154,9 +154,9 @@ class FightTest {
         assertTrue(answer);
     }
 
-    static class Rookie extends Warrior {
-        public int getAttack() {
-            return 1;
+    static class Rookie extends BaseWarriorImpl {
+        public Rookie() {
+            super(WARRIOR.INITIAL_HEALTH, 1);
         }
     }
 
@@ -164,7 +164,7 @@ class FightTest {
     @DisplayName("Warrior looses to Defender")
     void testWarriorVsDefender() {
         var warrior = createWarrior(WARRIOR);
-        var defender = new Defender();
+        var defender = DEFENDER.create();
 
         var res = Battle.fight(warrior, defender);
 
@@ -178,8 +178,8 @@ class FightTest {
     @Test
     @DisplayName("Defender wins Vampire")
     void testDefenderVsVampire() {
-        var defender = new Defender();
-        var vampire = new Vampire();
+        var defender = DEFENDER.create();
+        var vampire = VAMPIRE.create();
 
         var res = Battle.fight(defender, vampire);
 
@@ -193,7 +193,7 @@ class FightTest {
     @Test
     @DisplayName("Vampire vs Rookie remains healthy")
     void testVampireVsRookieRemainHealthy() {
-        var vampire = new Vampire();
+        var vampire = VAMPIRE.create();
         var rookie = new Rookie();
 
         var res = Battle.fight(rookie, vampire);
@@ -202,7 +202,7 @@ class FightTest {
                 () -> assertFalse(res),
                 () -> assertThat(vampire.getHealth())
                         .as(() -> "Vampire should not heal himself above original health")
-                        .isEqualTo(Vampire.INITIAL_HEALTH)
+                        .isEqualTo(VAMPIRE.INITIAL_HEALTH)
         );
     }
 }

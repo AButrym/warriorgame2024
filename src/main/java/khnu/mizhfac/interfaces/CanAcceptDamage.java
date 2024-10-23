@@ -1,5 +1,5 @@
 package khnu.mizhfac.interfaces;
 
-public interface CanAcceptDamage {
+public interface CanAcceptDamage extends HasHealth {
     void acceptDamage(int damage);
 }

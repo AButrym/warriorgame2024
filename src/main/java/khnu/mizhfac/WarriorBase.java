@@ -1,8 +1,9 @@
 package khnu.mizhfac;
 
+import khnu.mizhfac.interfaces.CanHealSelf;
 import khnu.mizhfac.interfaces.Warrior;
 
-public abstract class WarriorBase implements Warrior {
+public abstract class WarriorBase implements Warrior, CanHealSelf {
     private int health;
     private final int initialHealth;
 
@@ -24,7 +25,7 @@ public abstract class WarriorBase implements Warrior {
         setHealth(getHealth() - damage);
     }
 
-    protected void heal(int healPoints) {
+    public void heal(int healPoints) {
         setHealth(getHealth() + healPoints);
     }
 
