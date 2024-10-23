@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import java.util.function.Supplier;
 
 public class Army {
-    private List<Warrior> warriors = new ArrayList<>();
+    private final List<Warrior> warriors = new ArrayList<>();
 
     public Army addUnits(
             Supplier<Warrior> supplier,

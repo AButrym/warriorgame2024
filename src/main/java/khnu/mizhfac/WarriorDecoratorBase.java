@@ -4,7 +4,7 @@ import khnu.mizhfac.interfaces.Warrior;
 import khnu.mizhfac.interfaces.WarriorDecorator;
 
 public abstract class WarriorDecoratorBase implements Warrior, WarriorDecorator {
-    private Warrior warrior;
+    private final Warrior warrior;
 
     public WarriorDecoratorBase(Warrior warrior) {
         this.warrior = warrior;
