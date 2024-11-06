@@ -2,33 +2,35 @@ package khnu.mizhfac;
 
 import khnu.mizhfac.interfaces.Warrior;
 import khnu.mizhfac.interfaces.WarriorDecorator;
+import lombok.Getter;
 
+@Getter
 public abstract class WarriorDecoratorBase implements Warrior, WarriorDecorator {
-    private final Warrior warrior;
+    private final Warrior wrappedWarrior;
 
     public WarriorDecoratorBase(Warrior warrior) {
-        this.warrior = warrior;
+        this.wrappedWarrior = warrior;
     }
 
     abstract public Warrior clone();
 
     @Override
     public void acceptDamage(int damage) {
-        warrior.acceptDamage(damage);
+        wrappedWarrior.acceptDamage(damage);
     }
 
     @Override
     public int getAttack() {
-        return warrior.getAttack();
+        return wrappedWarrior.getAttack();
     }
 
     @Override
     public int getHealth() {
-        return warrior.getHealth();
+        return wrappedWarrior.getHealth();
     }
 
     @Override
-    public Warrior getWrappedWarrior() {
-        return warrior;
+    public String toString() {
+        return getWrappedWarrior().toString();
     }
 }

@@ -22,6 +22,12 @@ public class Army {
     }
 
     private void addOneUnit(Warrior warrior) {
+        // TODO
+        // wrap the warrior into a decorator WarriorInArmy
+        if (!warriors.isEmpty()) {
+            var last = warriors.getLast();
+            // bind the last with the new warrior
+        }
         warriors.add(warrior);
     }
 

@@ -4,17 +4,17 @@ import khnu.mizhfac.interfaces.Warrior;
 
 import static khnu.mizhfac.WarriorType.*;
 
-class WarriorFactory {
+public class WarriorFactory {
     static Warrior createWarrior(WarriorType type) {
         return switch (type) {
-            case WARRIOR -> new BaseWarriorImpl(WARRIOR.INITIAL_HEALTH, WARRIOR.ATTACK);
-            case KNIGHT -> new BaseWarriorImpl(KNIGHT.INITIAL_HEALTH, KNIGHT.ATTACK);
+            case WARRIOR -> new BaseWarriorImpl(WARRIOR.INITIAL_HEALTH, WARRIOR.ATTACK, type.name());
+            case KNIGHT -> new BaseWarriorImpl(KNIGHT.INITIAL_HEALTH, KNIGHT.ATTACK, type.name());
             case DEFENDER -> new DefenderDecorator(new BaseWarriorImpl(
-                    DEFENDER.INITIAL_HEALTH, DEFENDER.ATTACK),
-                    DEFENDER.extraProps.get("DEFENCE"));
+                            DEFENDER.INITIAL_HEALTH, DEFENDER.ATTACK, type.name()),
+                            DEFENDER.extraProps.get("DEFENCE"));
             case VAMPIRE -> new VampireDecorator(new BaseWarriorImpl(
-                    VAMPIRE.INITIAL_HEALTH, VAMPIRE.ATTACK),
-                    VAMPIRE.extraProps.get("VAMPIRISM"));
+                            VAMPIRE.INITIAL_HEALTH, VAMPIRE.ATTACK, type.name()),
+                            VAMPIRE.extraProps.get("VAMPIRISM"));
         };
     }
 

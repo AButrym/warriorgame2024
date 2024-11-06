@@ -1,7 +1,9 @@
 package khnu.mizhfac;
 
 import khnu.mizhfac.interfaces.*;
+import lombok.Getter;
 
+@Getter
 public class VampireDecorator extends WarriorDecoratorBase implements Warrior, HasVampirism {
     private final int vampirism;
 
@@ -31,10 +33,5 @@ public class VampireDecorator extends WarriorDecoratorBase implements Warrior, H
         } else {
             throw new IllegalStateException("Vampire should be able to heal himself");
         }
-    }
-
-    @Override
-    public int getVampirism() {
-        return vampirism;
     }
 }

@@ -4,7 +4,7 @@ import khnu.mizhfac.interfaces.Warrior;
 
 import java.util.Map;
 
-enum WarriorType {
+public enum WarriorType {
     WARRIOR(50, 5),
     KNIGHT(50, 7),
     DEFENDER(60, 3, Map.of("DEFENCE", 2)),

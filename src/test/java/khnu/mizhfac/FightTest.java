@@ -156,7 +156,7 @@ class FightTest {
 
     static class Rookie extends BaseWarriorImpl {
         public Rookie() {
-            super(WARRIOR.INITIAL_HEALTH, 1);
+            super(WARRIOR.INITIAL_HEALTH, 1, "ROOKIE");
         }
     }
 

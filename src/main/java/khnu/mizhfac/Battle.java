@@ -1,7 +1,9 @@
 package khnu.mizhfac;
 
 import khnu.mizhfac.interfaces.Warrior;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Battle {
     public static boolean fight(
             Warrior first,
@@ -13,7 +15,18 @@ public class Battle {
                 second.hit(first);
             }
         }
-        return first.isAlive();
+        var res = first.isAlive();
+        if (log.isDebugEnabled()) {
+            if (res) {
+                log.debug("{} is dead", second);
+                log.debug("{} is the winner", first);
+
+            } else {
+                log.debug("{} is dead", first);
+                log.debug("{} is the winner", second);
+            }
+        }
+        return res;
     }
 
     public static boolean fight(
