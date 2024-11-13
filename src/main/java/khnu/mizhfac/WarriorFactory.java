@@ -15,6 +15,7 @@ public class WarriorFactory {
             case VAMPIRE -> new VampireDecorator(new BaseWarriorImpl(
                             VAMPIRE.INITIAL_HEALTH, VAMPIRE.ATTACK, type.name()),
                             VAMPIRE.extraProps.get("VAMPIRISM"));
+            case LANCER -> new Lancer(type.name());
         };
     }
 

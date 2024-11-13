@@ -8,7 +8,9 @@ public enum WarriorType {
     WARRIOR(50, 5),
     KNIGHT(50, 7),
     DEFENDER(60, 3, Map.of("DEFENCE", 2)),
-    VAMPIRE(40, 4, Map.of("VAMPIRISM", 50)),;
+    VAMPIRE(40, 4, Map.of("VAMPIRISM", 50)),
+    LANCER(50, 6)
+    ;
 
     WarriorType(int initialHealth, int attack) {
         this(initialHealth, attack, Map.of());

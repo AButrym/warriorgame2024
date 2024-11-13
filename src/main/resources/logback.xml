@@ -23,6 +23,8 @@
     <logger name="khnu.mizhfac.interfaces" level="DEBUG" />
     <logger name="khnu.mizhfac.interfaces.HasHealth" level="OFF" />
     <logger name="khnu.mizhfac.Battle" level="DEBUG" />
+    <logger name="khnu.mizhfac.Lancer" level="OFF" />
+    <logger name="WarriorBase" level="DEBUG" />
     <root level="info">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>

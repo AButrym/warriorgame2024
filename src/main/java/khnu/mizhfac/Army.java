@@ -1,5 +1,6 @@
 package khnu.mizhfac;
 
+import khnu.mizhfac.interfaces.HasWarriorBehind;
 import khnu.mizhfac.interfaces.Warrior;
 
 import java.util.ArrayList;
@@ -21,14 +22,16 @@ public class Army {
         return this;
     }
 
-    private void addOneUnit(Warrior warrior) {
-        // TODO
+    public Army addOneUnit(Warrior warrior) {
         // wrap the warrior into a decorator WarriorInArmy
+        var unitToAdd = new WarriorInArmyDecorator(warrior);
         if (!warriors.isEmpty()) {
             var last = warriors.getLast();
             // bind the last with the new warrior
+            ((WarriorInArmyDecorator) last).setWarriorBehind(unitToAdd);
         }
-        warriors.add(warrior);
+        warriors.add(unitToAdd);
+        return this;
     }
 
     public Iterator<Warrior> firstAliveWarriorsIterator() {
@@ -42,6 +45,35 @@ public class Army {
     public Warrior getChampion() {
         return warriors.stream().filter(Warrior::isAlive).findFirst()
                 .orElseThrow(NoSuchElementException::new);
+    }
+
+    private static class WarriorInArmyDecorator
+            extends WarriorDecoratorBase
+            implements HasWarriorBehind {
+
+        WarriorInArmyDecorator warriorBehind = null;
+
+        WarriorInArmyDecorator(Warrior warrior) {
+            super(warrior);
+        }
+
+        @Override
+        public Warrior getWarriorBehind() {
+            Warrior nextAlive = warriorBehind;
+            if (nextAlive != null && !nextAlive.isAlive()) {
+                nextAlive = ((HasWarriorBehind) nextAlive).getWarriorBehind();
+            }
+            return nextAlive;
+        }
+
+        void setWarriorBehind(WarriorInArmyDecorator warriorBehind) {
+            this.warriorBehind = warriorBehind;
+        }
+
+        @Override
+        public Warrior clone() {
+            throw new UnsupportedOperationException();
+        }
     }
 
     private class AliveWarriorIterator implements Iterator<Warrior> {

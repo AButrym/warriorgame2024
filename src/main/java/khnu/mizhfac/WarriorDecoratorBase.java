@@ -1,5 +1,6 @@
 package khnu.mizhfac;
 
+import khnu.mizhfac.interfaces.CanAcceptDamage;
 import khnu.mizhfac.interfaces.Warrior;
 import khnu.mizhfac.interfaces.WarriorDecorator;
 import lombok.Getter;
@@ -32,5 +33,10 @@ public abstract class WarriorDecoratorBase implements Warrior, WarriorDecorator 
     @Override
     public String toString() {
         return getWrappedWarrior().toString();
+    }
+
+    @Override
+    public void hit(CanAcceptDamage opponent) {
+        wrappedWarrior.hit(opponent);
     }
 }
