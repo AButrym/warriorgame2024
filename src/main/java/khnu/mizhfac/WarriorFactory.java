@@ -16,6 +16,7 @@ public class WarriorFactory {
                             VAMPIRE.INITIAL_HEALTH, VAMPIRE.ATTACK, type.name()),
                             VAMPIRE.extraProps.get("VAMPIRISM"));
             case LANCER -> new Lancer(type.name());
+            case HEALER -> new Healer(type.name());
         };
     }
 

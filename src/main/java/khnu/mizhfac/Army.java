@@ -1,7 +1,6 @@
 package khnu.mizhfac;
 
-import khnu.mizhfac.interfaces.HasWarriorBehind;
-import khnu.mizhfac.interfaces.Warrior;
+import khnu.mizhfac.interfaces.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -49,12 +48,44 @@ public class Army {
 
     private static class WarriorInArmyDecorator
             extends WarriorDecoratorBase
-            implements HasWarriorBehind {
+            implements HasWarriorBehind, CanProcessCommand {
 
         WarriorInArmyDecorator warriorBehind = null;
 
         WarriorInArmyDecorator(Warrior warrior) {
             super(warrior);
+        }
+
+        private static final Command CHAMPION_HITS = new Command() {};
+
+        private static class HealCommand implements Command {
+            private final WarriorInArmyDecorator warrior;
+            HealCommand(WarriorInArmyDecorator warrior) {
+                this.warrior = warrior;
+            }
+
+            public WarriorInArmyDecorator getWarrior() {
+                return warrior;
+            }
+        }
+
+        public void processCommand(Command command) {
+            if (command instanceof HealCommand healCommand) {
+                if (getWrappedWarrior() instanceof CanHeal healer) {
+                    healer.heal(healCommand.getWarrior());
+                }
+                command = new HealCommand(this);
+            }
+            var next = getWarriorBehind();
+            if (next instanceof CanProcessCommand nextChecked) {
+                nextChecked.processCommand(command);
+            }
+        }
+
+        @Override
+        public void hit(CanAcceptDamage opponent) {
+            super.hit(opponent);
+            processCommand(new HealCommand(this));
         }
 
         @Override
@@ -95,5 +126,12 @@ public class Army {
             }
             return warriors.get(ix);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Army{" +
+               "warriors=" + warriors +
+               '}';
     }
 }

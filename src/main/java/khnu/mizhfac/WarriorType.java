@@ -9,7 +9,8 @@ public enum WarriorType {
     KNIGHT(50, 7),
     DEFENDER(60, 3, Map.of("DEFENCE", 2)),
     VAMPIRE(40, 4, Map.of("VAMPIRISM", 50)),
-    LANCER(50, 6)
+    LANCER(50, 6),
+    HEALER(60, 0, Map.of("HEAL_POWER", 2))
     ;
 
     WarriorType(int initialHealth, int attack) {

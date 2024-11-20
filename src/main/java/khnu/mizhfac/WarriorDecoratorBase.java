@@ -39,4 +39,9 @@ public abstract class WarriorDecoratorBase implements Warrior, WarriorDecorator 
     public void hit(CanAcceptDamage opponent) {
         wrappedWarrior.hit(opponent);
     }
+
+    @Override
+    public void heal(int healPoints) {
+        wrappedWarrior.heal(healPoints);
+    }
 }
